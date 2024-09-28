@@ -1,5 +1,8 @@
 .first{
     text-align: center;
+    font-style: normal;
+    color: red;
+    background-color: green;
 }
 .hero{
     width: 100%;
