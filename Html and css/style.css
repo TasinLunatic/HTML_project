@@ -1,8 +1,13 @@
 .first{
     text-align: center;
-    font-style: normal;
-    color: red;
-    background-color: green;
+    font-style:italic;
+    color: rgb(211, 7, 7);
+    background-color: rgb(90, 135, 101);
+    width: 70%;
+    margin: auto;
+}
+body{
+    background-color:rgb(90, 135, 101) ;
 }
 .hero{
     width: 100%;
@@ -10,24 +15,16 @@
 }
 .intr_div{
     width: 600px;
-    height: 300px;
+    height: 218px;
     border: 1px solid crimson;
     margin-bottom: 70px;
+    color: beige;
     
 }
-.second_div{
-    margin-top: 20px;
-    text-align: center;
-    margin-bottom: 50px;
-    border: 1px solid black;
-    width: 300px;
-    height: 150px;
-    padding: 30px;
-    margin: auto;
-}
+
 .fourth_div{
     width: 600px;
-    height: 300px;
+    height: 218px;
     border: 1px solid crimson;
     margin-bottom: 70px;
 }
@@ -42,28 +39,63 @@
 }
 .Nav_bar{
     height: 50px;
-    border: 1px solid rgb(137, 134, 134);
+    border: 1px solid rgb(230, 19, 19);
     width: 100%;
     display: flex;
     justify-content: end;
     gap: 20px;
     align-items: center;
-    background-color: rgb(129, 118, 118);
+    background-color: rgb(242, 234, 234);
 
 
 }
-.a{
+a{
     text-decoration: none;
-    color: black;
+    color: rgb(247, 241, 241);
     padding: 5px;
-    background-color: rgb(6, 219, 219);
+    background-color: rgb(90, 135, 101);
     border-radius: 5px;
     
 }
-.button{
-    background-color: blue;
-    padding: 5px;
-    border-radius: 3px;
-    color: antiquewhite;
-    border:none;
+
+.X{
+    display: flex;
+    align-items: center;
 }
+.Y{
+    display: flex;
+    align-items: center;
+}
+.Z{
+    display: flex;
+    align-items: center;
+}
+.P{
+    display: flex;
+    text-align: center;
+}
+.hover_button{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    padding: 7px;
+    width: 100px;
+    justify-content: center;
+    border: none;
+    background-color: rgb(40, 170, 251);
+    color: white;
+
+}
+.About{
+    color: beige;
+}
+.about{
+    color: beige;
+}
+.History{
+    color: beige;
+}
+.history{
+    color: beige;
+}
+
