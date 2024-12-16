@@ -1,10 +1,23 @@
-table,td,th,tr  {
+table1,td,th,tr{
     border: 1px solid;
     border-collapse: collapse;
     text-align: center;
     padding: 5px;
     
 }
-table{
+table1{
+    width:100%;
+}
+body{
+    background-color: rgb(164, 218, 177);
+
+}
+table2,td,th,tr{
+    border: 1px solid;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 5px;
+}
+table2{
     width: 100%;
 }
