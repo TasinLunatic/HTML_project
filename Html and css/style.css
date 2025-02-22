@@ -1,6 +1,6 @@
 
 body{
-   background-color:  rgb(238, 231, 231);
+   background-color:whitesmoke;
 }
 
 .Zee{
@@ -14,30 +14,39 @@ body{
     width: 100%;
     display: flex;
     justify-content:space-around;
-    gap: 25px;
+    gap: 50px;
     align-items:center;
-    background-color: rgb(101, 168, 245);
+    background-color: white;
     padding:10px;
+    margin-top: 20px;
 
 
 }
+.media{
+    display: flex;
+}
+.name_main{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15px;
+}
 .nav-item{
     display: flex;
-    gap: 35px;
-    margin-right: 30px;
+    gap: 30px;
+    margin-right: 20px;
     align-items: center;
 }
 a{
     text-decoration: none;
     color: rgb(247, 241, 241);
     padding: 5px;
-    background-color: rgb(51, 167, 157);
+    background-color: rgb(24, 165, 247);
     border-radius: 5px;
     
 }
 .logo{
-    width: 50px;
-    height: 50px;
+    width: 120px;
+    height: 100px;
     
 }
 img{
@@ -54,7 +63,7 @@ img{
 
 }
 span{
-    color: rgb(101, 168, 245);
+    color: rgb(24, 165, 247);
 }
 .details{
     font-size:larger;
