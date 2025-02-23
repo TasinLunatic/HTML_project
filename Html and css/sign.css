@@ -2,8 +2,10 @@
     text-align: center;
     font-style: normal;
     color: white;
-    width: 70%;
-    background-color: rgb(12, 12, 12);
+    border: none;
+    border-radius: 20px;
+    width: 90%;
+    background-color: rgb(24, 165, 247);
     margin: auto;
 }
 .hover_button:hover{
@@ -27,7 +29,7 @@
     height: 175px;
     padding: 40px;
     margin: auto;
-    background-color: rgb(192, 211, 241);
+    background-color: rgb(101, 194, 248);
 }
 .btn{
     display: flex;
@@ -60,7 +62,7 @@
     color: rgb(243, 91, 91);
 }
 body{
-    background-color: rgb(245, 189, 248);
+    background-color:whitesmoke;
 }
 .copy{
     text-align: end;
