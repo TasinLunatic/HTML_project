@@ -34,23 +34,32 @@ body{
 .bxl-facebook{
     font-weight:bold ;
     cursor: pointer;
+    font-size: 24px;
 }
 .bxl-instagram{
     font-weight: bolder;
     cursor: pointer;
+    font-size: 24px;
+
 }
 .bxl-gmail{
     font-weight: bold;
     cursor: pointer;
+    font-size: 24px;
+
 }
 .bxl-twitter{
     font-weight: bold;
     cursor: pointer;
+    font-size: 24px;
+
 }
 .bxs-edit-location{
     font-weight: bold;
     cursor: pointer;
     display: flex;
+    font-size: 24px;
+
     
 }
 .bx-search-alt-2{
