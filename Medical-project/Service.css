@@ -1,0 +1,87 @@
+body{
+    background-color: whitesmoke;
+}
+
+
+
+.one{
+    width: 250px;
+    height: 300px;
+    background-color: rgb(94, 172, 245);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.two{
+    width: 250px;
+    height: 300px;
+    background-color: rgb(255, 0, 255);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.three{
+    width: 250px;
+    height: 300px;
+    background-color: rgb(51, 167, 157);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.four{
+    width: 250px;
+    height: 300px;
+    background-color: rgb(255, 0, 128);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.five{
+    width: 250px;
+    height: 300px;
+    background-color:rgb(255, 0, 128);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.six{
+    width: 250px;
+    height: 300px;
+    background-color:rgb(94, 172, 245);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.seven{
+    width: 250px;
+    height: 300px;
+    background-color: rgb(255, 0, 255);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.eight{
+    width: 250px;
+    height: 300px;
+    background-color:  rgb(51, 167, 157);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+
+}
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 120px;
+    margin-left: 80px;
+    margin-right: 80px;
+}

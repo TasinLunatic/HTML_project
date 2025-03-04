@@ -1,0 +1,36 @@
+body{
+    background-color: whitesmoke;
+    text-align: center;
+}
+.T{
+    width:25%;
+    
+    
+}
+.a{
+    width: 25%;
+}
+.hover_submit{
+    background-color: rgb(82, 202, 242);
+    color: rgb(247, 240, 240);
+    transition: 1s;
+    border-radius: 2px; 
+    width: 80px; 
+    height: 25px; 
+    font-weight: bold;
+}
+.i{
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+    color: rgb(24, 165, 247);
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    
+    
+}
+.X{
+    width:100%;
+}

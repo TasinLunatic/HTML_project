@@ -1,0 +1,16 @@
+table, td, th, tr{
+    border: 1px solid;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 5px;
+    
+    
+}
+table{
+    width: 100%;
+}
+
+body{
+    background-color:whitesmoke;
+
+}

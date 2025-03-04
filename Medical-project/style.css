@@ -1,0 +1,131 @@
+
+body{
+   background-color:whitesmoke;
+}
+
+.Zee{
+    width: 100%;
+    height: 200px;
+}
+.Nav_bar{
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    gap: 50px;
+    align-items:center;
+    background-color: white;
+    padding:10px;
+    margin-top: 20px;
+
+
+}
+.media{
+    background-color: white;
+    display: flex;
+    justify-content:end;
+    margin-right: 25px;
+    margin-left:25px ;
+    gap: 25px;
+}
+
+.bxl-facebook{
+    font-weight:bold ;
+    cursor: pointer;
+}
+.bxl-instagram{
+    font-weight: bolder;
+    cursor: pointer;
+}
+.bxl-gmail{
+    font-weight: bold;
+    cursor: pointer;
+}
+.bxl-twitter{
+    font-weight: bold;
+    cursor: pointer;
+}
+.bxs-edit-location{
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    
+}
+.bx-search-alt-2{
+    font-weight: bold;
+    cursor: pointer;
+}
+.name_main{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15px;
+}
+.nav-item{
+    display: flex;
+    gap: 30px;
+    margin-right: 20px;
+    align-items: center;
+}
+a{
+    text-decoration: none;
+    color: rgb(247, 241, 241);
+    padding: 5px;
+    background-color: rgb(24, 165, 247);
+    border-radius: 5px;
+    
+}
+.logo{
+    width: 120px;
+    height: 100px;
+    
+}
+img{
+    width: 100%;
+}
+.first{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.text{
+    font-size:xx-large;
+    font-weight: bold;
+
+}
+span{
+    color: rgb(24, 165, 247);
+}
+.details{
+    font-size:larger;
+    font-style:italic ;
+    
+}
+.hero{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 120px;
+}
+.image{
+    width: 620px;
+    height: 380px;
+}
+button{
+    width: 110px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 120px;
+    margin-top: 20px;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(24, 165, 247);
+    font-weight: bold;
+
+}
+button:hover{
+    background-color: black;
+    color: white;
+    transition: 0.8s;
+}
