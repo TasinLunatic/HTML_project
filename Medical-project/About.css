@@ -6,6 +6,9 @@ table, td, th, tr{
     
     
 }
+td{
+    width: 500px;
+}
 table{
     width: 100%;
 }
@@ -13,4 +16,9 @@ table{
 body{
     background-color:whitesmoke;
 
+}
+.all_table{
+    display: flex;
+    flex-direction: column;
+    
 }
