@@ -2,9 +2,13 @@
     text-decoration: none;
     font-family: sans-serif;
 }
-a{
-    color: white;
+body{
+    background-color: whitesmoke;
 }
+a{
+    color: rgb(246, 242, 242);
+}
+.name
 
 .nav-bar{
     display: flex;
@@ -37,12 +41,12 @@ hr{
     
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 85%;
     margin: auto;
 }
 .part2{
-    height: 255px;
-    width:490px;
+    height: 300px;
+    width:300px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 0 25px rgb(0, 0, 0);
@@ -60,4 +64,8 @@ hr{
 .details{
     line-height: 30px;
     letter-spacing: 1px;
+}
+:hover.button{
+
+
 }
