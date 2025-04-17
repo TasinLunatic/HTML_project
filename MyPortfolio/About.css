@@ -16,7 +16,7 @@ body{
     width:300px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 0 25px rgb(246, 244, 244);
+    box-shadow: 0 0 25px rgb(119, 212, 233);
 }
 .image>img{
     width: 100%;
@@ -24,7 +24,7 @@ body{
 }
 button{
    height: 40px;
-   width: 100%;
+   width: 20%;
    border: none;
    border-radius: 5px;
    background-color:white;
