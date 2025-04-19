@@ -1,6 +1,9 @@
 body{
     color: whitesmoke;
 }
+.section{
+    align-items: center;
+}
 .address{
     background-color: black;
 }
@@ -15,6 +18,14 @@ form{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
+}
+.button{
+    display: flex;
+    justify-content: center;
+}
+.message{
+    
+    margin-bottom: 20px;
 }
