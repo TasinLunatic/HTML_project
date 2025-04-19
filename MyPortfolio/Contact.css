@@ -5,27 +5,43 @@ body{
     align-items: center;
 }
 .address{
+    color: rgb(243, 86, 86);
     background-color: black;
 }
 form{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center;
     
 }
 .form_item{
     color: black;
+    font-weight: bold;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    justify-content: space-between;
-    align-items: center;
+    justify-content:space-between;
+    align-items: end;
+    border: none;
+    border-radius: 5px;
 }
 .button{
     display: flex;
     justify-content: center;
+    margin-bottom: 200px;
+}
+button:hover{
+    color: aqua;
+    background-color: black;
+    cursor: pointer;
 }
 .message{
     
     margin-bottom: 20px;
+}
+.name.mail.pass{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
 }
