@@ -4,9 +4,17 @@ body{
 .address{
     background-color: black;
 }
-.form{
+form{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    
+}
+.form_item{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: end;
     align-items: center;
 }
