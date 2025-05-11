@@ -1,0 +1,13 @@
+.box{
+    border: 1px solid black;
+    border-radius: 10px;
+   padding: 10px;
+}
+.flex_box{
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content:center;
+}
