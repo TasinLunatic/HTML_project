@@ -3,7 +3,7 @@
     font-family: sans-serif;
 }
 body{
-    background-color: rgb(248, 245, 245);
+    background-color: rgb(5, 5, 5);
 }
 a{
     color: rgb(246, 242, 242);
@@ -12,20 +12,20 @@ a{
 .nav-bar{
     display: flex;
     justify-content: space-between;
-    background-color: rgb(7, 7, 7);
-    height: 50px;
+    background-color:rgb(7, 39, 39);
+    height: 30px;
     border: none;
-    border-radius: 15px;
+    border-radius: none;
     width: 100%;
-    gap: 50px;
+    gap: 15px;
     align-items: center;
     padding:10px;
-    margin-top: 20px;
 }
 hr{
     margin-bottom: 10%;
 
 }
+
 .nav-item{
     display: flex;
     gap: 20px;
@@ -36,18 +36,24 @@ hr{
     color: azure;
 }
 .intro{
-    
+    color:white;
+    background-color: rgb(33, 18, 48);
     display: flex;
-    justify-content: space-between;
-    width: 85%;
-    margin: auto;
+    justify-content: space-around;
+    width: 100%;
+    margin:auto;
+}
+.details{
+    line-height: 35px;
+    letter-spacing: 1px;
+   
 }
 .part2{
     height: 300px;
     width:300px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 0 25px rgb(0, 0, 0);
+    box-shadow:  0 0 25px rgb(119, 212, 233);
 }
 
 .part2 > img{
@@ -66,31 +72,4 @@ hr{
     font-size: 45px;
 }
 
-.details{
-    line-height: 30px;
-    letter-spacing: 1px;
-}
-button{
-   height: 40px;
-   width: 20%;
-   border: none;
-   border-radius: 5px;
-   background-color:rgb(45, 185, 245);
-   cursor: pointer;
-   font-weight:bold;
-}
-.left:hover{
-    background-color: rgb(40, 38, 38);
-    color: white;
-    transition: 0.8s;
-}
-.right:hover{
-    background-color: rgb(40, 38, 38);
-    color: white;
-    transition: 0.8s;
-}
 
-.main:hover{
-    color:rgb(0, 179, 255);
-    transition: 0.8s;
-}
