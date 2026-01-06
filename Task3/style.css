@@ -1,6 +1,6 @@
 .hero {
   width: 100%;
-  height: 400px;
+  height: 500px;
   background: linear-gradient(to right, #0a1a3a, #0b2c6d);
   display: flex;
   align-items: center;
@@ -29,7 +29,7 @@
   display: flex;
   gap: 10px;
 }
-.btn-primary {
+.btn-primary:hover {
   padding: 10px 16px;
   background-color: #4f46e5;
   color: #ffffff;
@@ -37,11 +37,91 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.btn-secondary {
+
+.btn-secondary:hover {
   padding: 10px 16px;
-  background-color: #e5e7eb;
-  color: #000000;
+  background-color: #8341a9;
+  color: #f5f4f4;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
+
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+body {
+      padding-top: 70px;
+    }
+
+.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #1a4fd8;
+    }
+
+    .explore {
+      text-decoration: none;
+      color: #000;
+      font-size: 14px;
+    }
+    .nav-center input {
+      width: 450px;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .plans {
+      text-decoration: none;
+      color: #000;
+      font-size: 14px;
+    }
+
+    .login:hover {
+      padding: 8px 14px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      background-color: #3530a2;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .signup:hover {
+      padding: 8px 14px;
+      border-radius: 6px;
+      background-color: #93cff0;
+      color: #4a23a6;
+      border: none;
+      cursor: pointer;
+    }
