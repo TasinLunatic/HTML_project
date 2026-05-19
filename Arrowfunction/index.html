@@ -26,6 +26,15 @@
 <body>
 
     <div id="colorBox"></div>
+     <script>
+        const colorBox = document.getElementById("colorBox");
+
+        colorBox.addEventListener("click", function () {
+            setTimeout(() => {
+                colorBox.style.backgroundColor = "pink";
+            }, 2000);
+        });
+    </script>
 
 </body>
 </html>
