@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minimalist Snake</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-muted: #6b7280;
+            --accent-snake: #38bdf8;
+            --accent-food: #f43f5e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        #scoreboard {
+            display: flex;
+            gap: 30px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .score-box span {
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        #score { color: var(--accent-snake); }
+        #high-score { color: var(--text-muted); }
+
+        #game-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 1;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 12px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: #070a12;
+            border-radius: 16px;
+        }
+
+        .screen-overlay {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            background: rgba(7, 10, 18, 0.85);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            z-index: 10;
+        }
+
+        .screen-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .screen-overlay h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            margin-bottom: 25px;
+            color: var(--accent-food);
+        }
+
+        button {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        button:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+
+        /* Virtual Joystick Styles */
+        #joystick-zone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            cursor: grab;
+        }
+        #joystick-zone:active { cursor: grabbing; }
+
+        #joystick-visual {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 6;
+        }
+        #joystick-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-snake);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>S n a k e</h1>
+        <div id="scoreboard">
+            <div class="score-box">Score <span id="score">0</span></div>
+            <div class="score-box">Best <span id="high-score">0</span></div>
+        </div>
+    </header>
+
+    <div id="game-wrapper">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- Interactive Control Touch Area -->
+        <div id="joystick-zone"></div>
+        <div id="joystick-visual"><div id="joystick-knob"></div></div>
+
+        <!-- Elegant Overlay Screens -->
+        <div id="menu-screen" class="screen-overlay active">
+            <button onclick="startGame()">Start Game</button>
+        </div>
+        
+        <div id="game-over-screen" class="screen-overlay">
+            <h2>Game Over</h2>
+            <button onclick="startGame()">Try Again</button>
+        </div>
+    </div>
+
+    <footer>
+        Desktop: Use Arrow Keys or WASD<br>
+        Mobile: Drag / Swipe anywhere inside the grid
+    </footer>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const scoreElement = document.getElementById("score");
+        const highScoreElement = document.getElementById("high-score");
+        const menuScreen = document.getElementById("menu-screen");
+        const gameOverScreen = document.getElementById("game-over-screen");
+        const joystickZone = document.getElementById("joystick-zone");
+        const joystickVisual = document.getElementById("joystick-visual");
+        const joystickKnob = document.getElementById("joystick-knob");
+
+        // High-DPI Canvas Setup for super crisp rendering
+        const GRID_UNITS = 20; 
+        let tileSize;
+        
+        function resizeCanvas() {
+            const size = Math.min(canvas.clientWidth, 400);
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = size * dpr;
+            canvas.height = size * dpr;
+            ctx.scale(dpr, dpr);
+            tileSize = size / GRID_UNITS;
+        }
+
+        // Game State Variables
+        let snake = [];
+        let food = { x: 0, y: 0 };
+        let currentDir = { x: 1, y: 0 };
+        let inputQueue = []; // Elegant control buffer
+        let score = 0;
+        let gameLoopId = null;
+        let lastFrameTime = 0;
+        const GAME_SPEED = 95; // ms per tick
+
+        highScoreElement.innerText = localStorage.getItem("elegantSnakeBest") || 0;
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // --- Elegant Input Queue Controller ---
+        function handleInput(nextDir) {
+            const lastDir = inputQueue.length > 0 ? inputQueue[inputQueue.length - 1] : currentDir;
+            // Prevent immediate reverse tracking
+            if (nextDir.x !== 0 && lastDir.x !== 0) return;
+            if (nextDir.y !== 0 && lastDir.y !== 0) return;
+            
+            // Limit buffer size to 2 inputs to keep feeling snappy
+            if (inputQueue.length < 2) {
+                inputQueue.push(nextDir);
+            }
+        }
+
+        // Keyboard Event System
+        document.addEventListener("keydown", (e) => {
+            const key = e.key.toLowerCase();
+            if (key === "arrowup" || key === "w") handleInput({ x: 0, y: -1 });
+            if (key === "arrowdown" || key === "s") handleInput({ x: 0, y: 1 });
+            if (key === "arrowleft" || key === "a") handleInput({ x: 0, y: -1 });
+            if (key === "arrowright" || key === "d") handleInput({ x: 1, y: 0 });
+        });
+
+        // Touch / Gesture Control System (Virtual Joystick)
+        let touchStart = null;
+        const joystickThreshold = 15; // Min distance to trigger direction
+
+        function handlePointerStart(x, y) {
+            const bounds = joystickZone.getBoundingClientRect();
+            touchStart = { x: x - bounds.left, y: y - bounds.top };
+            
+            joystickVisual.style.left = `${touchStart.x + 12}px`;
+            joystickVisual.style.top = `${touchStart.y + 12}px`;
+            joystickVisual.style.opacity = "1";
+            joystickVisual.style.transform = "translate(-50%, -50%) scale(1)";
+        }
+
+        function handlePointerMove(x, y) {
+            if (!touchStart) return;
+            const bounds = joystickZone.getBoundingClientRect();
+            const currentX = x - bounds.left;
+            const currentY = y - bounds.top;
+
+            const dx = currentX - touchStart.x;
+            const dy = currentY - touchStart.y;
+            const distance = Math.hypot(dx, dy);
+
+            // Constraint knob within visual boundary
+            const maxRadius = 30;
+            let angle = Math.atan2(dy, dx);
+            let knobX = distance > maxRadius ? Math.cos(angle) * maxRadius : dx;
+            let knobY = distance > maxRadius ? Math.sin(angle) * maxRadius : dy;
+            
+            joystickKnob.style.transform = `translate(calc(-50% + ${knobX}px), calc(-50% + ${knobY}px))`;
+
+            if (distance > joystickThreshold) {
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    handleInput({ x: dx > 0 ? 1 : -1, y: 0 });
+                } else {
+                    handleInput({ x: dy > 0 ? 1 : -1 });
+                }
+            }
+        }
+
+        function handlePointerEnd() {
+            touchStart = null;
+            joystickVisual.style.opacity = "0";
+            joystickVisual.style.transform = "translate(-50%, -50%) scale(0.8)";
+            joystickKnob.style.transform = "translate(-50%, -50%)";
+        }
+
+        joystickZone.addEventListener("mousedown", (e) => handlePointerStart(e.clientX, e.clientY));
+        window.addEventListener("mousemove", (e) => handlePointerMove(e.clientX, e.clientY));
+        window.addEventListener("mouseup", handlePointerEnd);
+
+        joystickZone.addEventListener("touchstart", (e) => {
+            const t = e.touches[0];
+            handlePointerStart(t.clientX, t.clientY);
+        });
+        joystickZone.addEventListener("touchmove", (e) => {
+            const t = e.touches[0];
+            handlePointerMove(t.clientX, t.clientY);
+        });
+        joystickZone.addEventListener("touchend", handlePointerEnd);
+
+
+        // --- Core Game Functions ---
+        function startGame() {
+            snake = [
+                { x: 5, y: 10 },
+                { x: 4, y: 10 },
+                { x: 3, y: 10 }
+            ];
+            inputQueue = [];
+            currentDir = { x: 1, y: 0 };
+            score = 0;
+            scoreElement.innerText = score;
+            
+            menuScreen.classList.remove("active");
+            gameOverScreen.classList.remove("active");
+            
+            spawnFood();
+            lastFrameTime = performance.now();
+            if (gameLoopId) cancelAnimationFrame(gameLoopId);
+            gameLoopId = requestAnimationFrame(runGame);
+        }
+
+        function runGame(timestamp) {
+            gameLoopId = requestAnimationFrame(runGame);
+            const elapsed = timestamp - lastFrameTime;
+
+            if (elapsed >= GAME_SPEED) {
+                lastFrameTime = timestamp - (elapsed % GAME_SPEED);
+                
+                // Process next movement step from queue
+                if (inputQueue.length > 0) {
+                    currentDir = inputQueue.shift();
+                }
+
+                updateSnake();
+                checkCollisions();
+                render();
+            }
+        }
+
+        function updateSnake() {
+            const head = { 
+                x: snake[0].x + currentDir.x, 
+                y: snake[0].y + currentDir.y 
+            };
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                score += 10;
+                scoreElement.innerText = score;
+                spawnFood();
+            } else {
+                snake.pop();
+            }
+        }
+
+        function checkCollisions() {
+            const head = snake[0];
+
+            // Wall Collision
+            if (head.x < 0 || head.x >= GRID_UNITS || head.y < 0 || head.y >= GRID_UNITS) {
+                endGame();
+            }
+
+            // Self Collision
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    endGame();
+                }
+            }
+        }
+
+        function spawnFood() {
+            food.x = Math.floor(Math.random() * GRID_UNITS);
+            food.y = Math.floor(Math.random() * GRID_UNITS);
+            
+            // Loop adjustment if food lands on body
+            for (let part of snake) {
+                if (part.x === food.x && part.y === food.y) {
+                    spawnFood();
+                    break;
+                }
+            }
+        }
+
+        function endGame() {
+            cancelAnimationFrame(gameLoopId);
+            gameOverScreen.classList.add("active");
+            
+            const savedBest = localStorage.getItem("elegantSnakeBest") || 0;
+            if (score > savedBest) {
+                localStorage.setItem("elegantSnakeBest", score);
+                highScoreElement.innerText = score;
+            }
+        }
+
+        // --- Luxury Render Engine ---
+        function render() {
+            const size = Math.min(canvas.clientWidth, 400);
+            ctx.clearRect(0, 0, size, size);
+
+            // 1. Render Clean Minimalist Grid Backdrop
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.015)";
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= GRID_UNITS; i++) {
+                ctx.beginPath();
+                ctx.moveTo(i * tileSize, 0);
+                ctx.lineTo(i * tileSize, size);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(0, i * tileSize);
+                ctx.lineTo(size, i * tileSize);
+                ctx.stroke();
+            }
+
+            // 2. Render Target Food
+            ctx.fillStyle = varColor('--accent-food');
+            ctx.beginPath();
+            const foodRadius = (tileSize / 2) - 3;
+            ctx.arc(
+                (food.x * tileSize) + tileSize / 2, 
+                (food.y * tileSize) + tileSize / 2, 
+                foodRadius, 0, Math.PI * 2
+            );
+            ctx.fill();
+
+            // 3. Render Elegant Tapered Snake Body
+            snake.forEach((part, index) => {
+                const isHead = index === 0;
+                
+                if (isHead) {
+                    ctx.fillStyle = varColor('--accent-snake');
+                } else {
+                    // Gradual fade and structural shrink over tail length
+                    const factor = 1 - (index / snake.length) * 0.4; 
+                    ctx.fillStyle = `rgba(56, 189, 248, ${factor - 0.1})`;
+                }
+
+                ctx.beginPath();
+                const currentRadius = isHead ? (tileSize / 2) - 1.5 : ((tileSize / 2) - 2.5);
+                ctx.arc(
+                    (part.x * tileSize) + tileSize / 2, 
+                    (part.y * tileSize) + tileSize / 2, 
+                    Math.max(2, currentRadius), 0, Math.PI * 2
+                );
+                ctx.fill();
+            });
+        }
+
+        // Helper to grab CSS variable colors for injection into Canvas API
+        function varColor(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        }
+
+        // Initialize display frame
+        render();
+    </script>
+</body>
+</html>
